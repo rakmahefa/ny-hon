@@ -1,6 +1,6 @@
 use dioxus::prelude::*;
 
-use crate::ui::{LibraryPage, Theme};
+use crate::ui::{components::app_shell::AppShell, LibraryPage, Theme};
 
 #[component]
 pub fn App() -> Element {
@@ -11,7 +11,14 @@ pub fn App() -> Element {
         div {
             class: "ny-app",
             "data-theme": "{theme.read().as_attr()}",
-            LibraryPage {}
+            AppShell {
+                theme: *theme.read(),
+                on_toggle_theme: move |_| {
+                    let next = if *theme.read() == Theme::Dark { Theme::Light } else { Theme::Dark };
+                    theme.set(next);
+                },
+                LibraryPage {}
+            }
         }
     }
 }
