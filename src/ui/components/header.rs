@@ -5,6 +5,7 @@ use super::theme::Theme;
 #[derive(Props, Clone, PartialEq)]
 pub struct HeaderProps {
     pub theme: Theme,
+    pub title: String,
     pub on_toggle_theme: EventHandler<MouseEvent>,
 }
 
@@ -14,7 +15,7 @@ pub fn Header(props: HeaderProps) -> Element {
         header { class: "ny-header",
             div { class: "ny-header__title",
                 span { class: "ny-eyebrow", "PERSONAL READER" }
-                h1 { "Library" }
+                h1 { "{props.title}" }
             }
             div { class: "ny-header__actions",
                 label { class: "ny-search",
