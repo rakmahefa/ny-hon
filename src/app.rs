@@ -1,7 +1,8 @@
 use dioxus::prelude::*;
 
 use crate::ui::{
-    AppShell, EmptyState, HomePage, LibraryPage, MangaDetailPage, NavItem, Theme, UpdatesPage,
+    AppShell, BrowsePage, EmptyState, HomePage, LibraryPage, MangaDetailPage, NavItem, Theme,
+    UpdatesPage,
 };
 
 #[component]
@@ -42,7 +43,9 @@ pub fn App() -> Element {
                     description: "The history surface is ready for persisted reading activity, resume actions and search.".to_string(),
                 }
             },
-            NavItem::Browse => rsx! { HomePage {} },
+            NavItem::Browse => rsx! {
+                BrowsePage {}
+            },
             NavItem::More => rsx! {
                 EmptyState {
                     eyebrow: "MORE".to_string(),
@@ -56,6 +59,7 @@ pub fn App() -> Element {
     rsx! {
         link { rel: "stylesheet", href: asset!("/assets/app.css") }
         link { rel: "stylesheet", href: asset!("/assets/manga-detail.css") }
+        link { rel: "stylesheet", href: asset!("/assets/browse.css") }
         div {
             class: "ny-app",
             "data-theme": "{theme.read().as_attr()}",
