@@ -1,0 +1,13 @@
+[package]
+name = "ny-hon"
+version = "0.1.0"
+edition = "2024"
+license = "MIT OR Apache-2.0"
+description = "A modular Rust + Dioxus desktop reader for manga, webtoons, and comics."
+
+[dependencies]
+dioxus = { version = "0.7", features = ["desktop"] }
+
+[features]
+default = ["desktop"]
+desktop = ["dioxus/desktop"]
