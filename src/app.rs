@@ -1,7 +1,7 @@
 use dioxus::prelude::*;
 
 use crate::ui::{
-    AppShell, BrowsePage, EmptyState, HistoryPage, LibraryPage, MangaDetailPage, NavItem, Theme,
+    AppShell, BrowsePage, DownloadsPage, HistoryPage, LibraryPage, MangaDetailPage, NavItem, Theme,
     UpdatesPage,
 };
 
@@ -14,7 +14,10 @@ pub fn App() -> Element {
     let title = if detail_title.read().is_some() {
         "Manga detail".to_string()
     } else {
-        active.read().label().to_string()
+        match *active.read() {
+            NavItem::More => "Downloads".to_string(),
+            item => item.label().to_string(),
+        }
     };
 
     let page = if let Some(selected_title) = detail_title.read().clone() {
@@ -38,13 +41,7 @@ pub fn App() -> Element {
             NavItem::Updates => rsx! { UpdatesPage {} },
             NavItem::History => rsx! { HistoryPage {} },
             NavItem::Browse => rsx! { BrowsePage {} },
-            NavItem::More => rsx! {
-                EmptyState {
-                    eyebrow: "MORE".to_string(),
-                    title: "More library tools".to_string(),
-                    description: "Settings, downloads, categories, tracking and backup will live behind this secondary destination.".to_string(),
-                }
-            },
+            NavItem::More => rsx! { DownloadsPage {} },
         }
     };
 
