@@ -1,0 +1,12 @@
+[application]
+name = "ny-hon"
+default_platform = "desktop"
+asset_dir = "assets"
+
+[web.app]
+title = "Ny Hon"
+
+[bundle]
+identifier = "dev.rakmahefa.nyhon"
+publisher = "Rakotoarimanana Mahefa"
+icon = []
