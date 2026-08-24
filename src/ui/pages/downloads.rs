@@ -275,10 +275,13 @@ pub fn DownloadsPage(props: DownloadsPageProps) -> Element {
                                                         if *selection_mode.read() {
                                                             span { class: "ny-eyebrow", if is_selected { "SELECTED" } else { "SELECT" } }
                                                         } else {
-                                                            Button { variant: if item.status == DownloadStatus::Failed { ButtonVariant::Primary } else { ButtonVariant::Ghost }, label: action_label }
+                                                            Button {
+                                                                variant: if item.status == DownloadStatus::Failed { ButtonVariant::Primary } else { ButtonVariant::Ghost },
+                                                                label: action_label.to_string(),
+                                                            }
                                                         }
-                                                    </div>
-                                                </div>
+                                                    }
+                                                }
                                             }
                                         }
                                     }
