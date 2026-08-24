@@ -1,7 +1,7 @@
 use dioxus::prelude::*;
 
 use crate::ui::{
-    components::{app_shell::AppShell, card::Card, header::HeaderProps, library_card::LibraryCard},
+    components::{app_shell::AppShell, card::Card, library_card::LibraryCard},
     Theme,
 };
 
