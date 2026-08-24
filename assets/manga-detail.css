@@ -1,0 +1,212 @@
+.ny-detail-page {
+    gap: 18px;
+}
+
+.ny-detail-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.ny-detail-toolbar__actions,
+.ny-detail-actions,
+.ny-detail-chapter-toolbar,
+.ny-detail-chapter-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.ny-detail-hero {
+    display: grid;
+    grid-template-columns: minmax(180px, 230px) minmax(0, 1fr) minmax(190px, 240px);
+    gap: 22px;
+    padding: 22px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(140deg, var(--surface) 0%, var(--surface-2) 100%);
+    box-shadow: var(--shadow);
+}
+
+.ny-detail-hero__cover {
+    min-width: 0;
+}
+
+.ny-cover--detail {
+    min-height: 300px;
+    height: 100%;
+    border-radius: 18px;
+}
+
+.ny-detail-hero__content {
+    display: grid;
+    align-content: center;
+    gap: 14px;
+    min-width: 0;
+}
+
+.ny-detail-hero__content h1 {
+    margin: 0;
+    font-size: 46px;
+    line-height: 1;
+    letter-spacing: -.05em;
+}
+
+.ny-detail-hero__description {
+    max-width: 720px;
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.65;
+}
+
+.ny-detail-metadata {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 18px;
+}
+
+.ny-detail-metadata div {
+    display: grid;
+    gap: 3px;
+}
+
+.ny-detail-metadata strong,
+.ny-detail-metadata span,
+.ny-detail-progress-card span,
+.ny-detail-stat-grid span,
+.ny-tracking-card span,
+.ny-detail-chapter-copy span {
+    font-size: 12px;
+}
+
+.ny-detail-metadata span,
+.ny-detail-progress-card span,
+.ny-detail-stat-grid span,
+.ny-tracking-card span,
+.ny-detail-chapter-copy span {
+    color: var(--muted);
+}
+
+.ny-detail-progress-card {
+    display: grid;
+    align-content: center;
+    gap: 10px;
+    padding: 18px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: rgba(255,255,255,.025);
+}
+
+.ny-detail-progress-card strong {
+    font-size: 48px;
+    letter-spacing: -.06em;
+}
+
+.ny-detail-grid {
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 14px;
+}
+
+.ny-detail-card {
+    min-width: 0;
+}
+
+.ny-detail-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.ny-detail-stat-grid div {
+    display: grid;
+    gap: 4px;
+    padding: 14px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--surface-2);
+}
+
+.ny-detail-stat-grid strong {
+    font-size: 25px;
+    letter-spacing: -.04em;
+}
+
+.ny-tracking-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 10px 14px;
+    align-items: center;
+}
+
+.ny-tracking-card div {
+    display: grid;
+    gap: 3px;
+}
+
+.ny-detail-chapters .ny-card__body {
+    display: grid;
+    gap: 16px;
+}
+
+.ny-detail-chapter-toolbar {
+    justify-content: space-between;
+}
+
+.ny-detail-chapter-list {
+    display: grid;
+}
+
+.ny-detail-chapter-row {
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr) minmax(140px, auto) auto;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.ny-detail-chapter-row:last-child {
+    border-bottom: 0;
+}
+
+.ny-detail-chapter-number {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--surface-2);
+    font-weight: 800;
+}
+
+.ny-detail-chapter-copy {
+    display: grid;
+    gap: 4px;
+    min-width: 0;
+}
+
+@media (max-width: 1250px) {
+    .ny-detail-hero {
+        grid-template-columns: 190px minmax(0, 1fr);
+    }
+
+    .ny-detail-progress-card {
+        grid-column: 1 / -1;
+    }
+
+    .ny-detail-chapter-row {
+        grid-template-columns: 56px minmax(0, 1fr) auto;
+    }
+
+    .ny-detail-chapter-status {
+        grid-column: 2 / 3;
+    }
+
+    .ny-detail-chapter-row .ny-library-toolbar__actions {
+        grid-column: 3 / 4;
+        grid-row: 1 / 3;
+    }
+}
