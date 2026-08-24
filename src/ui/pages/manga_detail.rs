@@ -67,6 +67,11 @@ pub fn MangaDetailPage(props: MangaDetailPageProps) -> Element {
     let mut filter = use_signal(|| ChapterFilter::All);
     let mut library_added = use_signal(|| true);
     let mut search = use_signal(String::new);
+    let on_back = props.on_back.clone();
+    let on_open_reader = props.on_open_reader.clone();
+    let on_download = props.on_download.clone();
+    let on_toggle_library = props.on_toggle_library.clone();
+    let on_refresh = props.on_refresh.clone();
 
     let chapter_query = search.read().trim().to_lowercase();
     let visible: Vec<Chapter> = CHAPTERS
@@ -97,7 +102,7 @@ pub fn MangaDetailPage(props: MangaDetailPageProps) -> Element {
                     title: "Title information unavailable".to_string(),
                     description: "Retry remains an application-level concern while the UI keeps a deterministic error boundary.".to_string(),
                     action_label: Some("Retry".to_string()),
-                    onclick: Some(EventHandler::new(move |_| props.on_refresh.call(()))),
+                    onclick: Some(EventHandler::new(move |_| on_refresh.call(()))),
                 }
             }
         },
@@ -122,7 +127,7 @@ pub fn MangaDetailPage(props: MangaDetailPageProps) -> Element {
                 Button {
                     variant: ButtonVariant::Ghost,
                     label: "← Back to library",
-                    onclick: move |_| props.on_back.call(()),
+                    onclick: move |_| on_back.call(()),
                 }
                 div { class: "ny-detail-toolbar__actions",
                     Badge { label: "MANGA".to_string() }
@@ -152,7 +157,7 @@ pub fn MangaDetailPage(props: MangaDetailPageProps) -> Element {
                         Button {
                             variant: ButtonVariant::Primary,
                             label: "Continue reading",
-                            onclick: move |_| props.on_open_reader.call(()),
+                            onclick: move |_| on_open_reader.call(()),
                         }
                         Button {
                             variant: ButtonVariant::Secondary,
@@ -160,13 +165,13 @@ pub fn MangaDetailPage(props: MangaDetailPageProps) -> Element {
                             onclick: move |_| {
                                 let next = !*library_added.read();
                                 library_added.set(next);
-                                props.on_toggle_library.call(());
+                                on_toggle_library.call(());
                             },
                         }
                         Button {
                             variant: ButtonVariant::Secondary,
                             label: "Download latest",
-                            onclick: move |_| props.on_download.call(()),
+                            onclick: move |_| on_download.call(()),
                         }
                     }
                 }
@@ -252,8 +257,8 @@ pub fn MangaDetailPage(props: MangaDetailPageProps) -> Element {
                                     if chapter.downloaded { Badge { label: "Downloaded".to_string() } }
                                 }
                                 div { class: "ny-library-toolbar__actions",
-                                    Button { variant: ButtonVariant::Ghost, label: "Read", onclick: move |_| props.on_open_reader.call(()) }
-                                    Button { variant: ButtonVariant::Secondary, label: if chapter.downloaded { "Downloaded".to_string() } else { "Download".to_string() }, onclick: move |_| props.on_download.call(()) }
+                                    Button { variant: ButtonVariant::Ghost, label: "Read", onclick: move |_| on_open_reader.call(()) }
+                                    Button { variant: ButtonVariant::Secondary, label: if chapter.downloaded { "Downloaded".to_string() } else { "Download".to_string() }, onclick: move |_| on_download.call(()) }
                                 }
                             }
                         }
