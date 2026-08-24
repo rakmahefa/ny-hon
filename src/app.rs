@@ -1,7 +1,8 @@
 use dioxus::prelude::*;
 
 use crate::ui::{
-    AppShell, BrowsePage, HistoryPage, LibraryPage, MangaDetailPage, NavItem, Theme, UpdatesPage,
+    AppShell, BrowsePage, EmptyState, HistoryPage, LibraryPage, MangaDetailPage, NavItem, Theme,
+    UpdatesPage,
 };
 
 #[component]
