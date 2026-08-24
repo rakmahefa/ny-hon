@@ -4,7 +4,7 @@ use dioxus::prelude::*;
 pub struct CardProps {
     #[props(default)]
     pub title: Option<String>,
-    #[props(default = "")]
+    #[props(default = String::new())]
     pub class: String,
     pub children: Element,
 }
