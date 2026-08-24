@@ -2,6 +2,7 @@ use dioxus::prelude::*;
 
 #[derive(Props, Clone, PartialEq)]
 pub struct EmptyStateProps {
+    pub eyebrow: String,
     pub title: String,
     pub description: String,
     #[props(default)]
@@ -15,7 +16,7 @@ pub fn EmptyState(props: EmptyStateProps) -> Element {
     rsx! {
         section { class: "ny-empty-state",
             div { class: "ny-empty-state__mark", "—" }
-            span { class: "ny-eyebrow", "NOTHING HERE YET" }
+            span { class: "ny-eyebrow", "{props.eyebrow}" }
             h2 { "{props.title}" }
             p { "{props.description}" }
             if let Some(label) = props.action_label.clone() {
