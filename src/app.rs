@@ -1,7 +1,6 @@
 use dioxus::prelude::*;
 
-use crate::ui::{AppShell, HomePage, LibraryPage, NavItem, Theme};
-use crate::ui::components::empty_state::EmptyState;
+use crate::ui::{AppShell, EmptyState, HomePage, LibraryPage, NavItem, Theme};
 
 #[component]
 pub fn App() -> Element {
