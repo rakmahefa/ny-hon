@@ -1,6 +1,6 @@
 use dioxus::prelude::*;
 
-use crate::ui::{AppShell, EmptyState, HomePage, LibraryPage, NavItem, Theme};
+use crate::ui::{AppShell, EmptyState, HomePage, LibraryPage, NavItem, Theme, UpdatesPage};
 
 #[component]
 pub fn App() -> Element {
@@ -25,13 +25,7 @@ pub fn App() -> Element {
                 },
                 match *active.read() {
                     NavItem::Library => rsx! { LibraryPage {} },
-                    NavItem::Updates => rsx! {
-                        EmptyState {
-                            eyebrow: "UPDATES".to_string(),
-                            title: "New chapters at a glance".to_string(),
-                            description: "The updates surface is ready for source-backed chapter releases, filters and bulk actions.".to_string(),
-                        }
-                    },
+                    NavItem::Updates => rsx! { UpdatesPage {} },
                     NavItem::History => rsx! {
                         EmptyState {
                             eyebrow: "HISTORY".to_string(),
