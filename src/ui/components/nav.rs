@@ -22,6 +22,7 @@ impl NavItem {
 #[derive(Props, Clone, PartialEq)]
 pub struct SidebarProps {
     pub active: NavItem,
+    pub on_select: EventHandler<NavItem>,
 }
 
 #[component]
@@ -47,6 +48,7 @@ pub fn Sidebar(props: SidebarProps) -> Element {
                     button {
                         class: if item == props.active { "ny-nav-item is-active" } else { "ny-nav-item" },
                         aria_current: if item == props.active { "page" } else { "false" },
+                        onclick: move |_| props.on_select.call(item),
                         span { class: "ny-nav-item__index", "{index}" }
                         span { "{item.label()}" }
                     }
