@@ -8,6 +8,7 @@ use crate::ui::{
         card::Card,
         library_card::LibraryCard,
         progress::Progress,
+        section_header::SectionHeader,
     },
     Theme,
 };
@@ -21,10 +22,10 @@ pub struct HomePageProps {
 #[component]
 pub fn HomePage(props: HomePageProps) -> Element {
     let featured = [
-        ("Frieren", "Manga", "Chapter 141", 82_u8, "FR"),
-        ("The Beginning After the End", "Webtoon", "Chapter 233", 64_u8, "TB"),
-        ("Solo Leveling", "Manga", "Chapter 179", 91_u8, "SL"),
-        ("The Sandman", "Comic", "Issue 18", 37_u8, "SM"),
+        ("Frieren", "Manga", 82_u8, "FR"),
+        ("The Beginning After the End", "Webtoon", 64_u8, "TB"),
+        ("Solo Leveling", "Manga", 91_u8, "SL"),
+        ("The Sandman", "Comic", 37_u8, "SM"),
     ];
 
     let new_updates = [
@@ -57,16 +58,14 @@ pub fn HomePage(props: HomePageProps) -> Element {
                     }
                 }
 
-                div { class: "ny-section-heading",
-                    div {
-                        span { class: "ny-eyebrow", "CONTINUE" }
-                        h2 { "Pick up where you left off" }
-                    }
-                    Button { variant: ButtonVariant::Ghost, label: "View all" }
+                SectionHeader {
+                    eyebrow: "CONTINUE".to_string(),
+                    title: "Pick up where you left off".to_string(),
+                    action_label: Some("View all".to_string()),
                 }
 
                 section { class: "ny-library-grid",
-                    for (title, kind, chapter, completion, accent) in featured {
+                    for (title, kind, completion, accent) in featured {
                         LibraryCard {
                             title: title.to_string(),
                             kind: kind.to_string(),
