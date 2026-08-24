@@ -37,51 +37,11 @@ struct UpdateItem {
 }
 
 const UPDATES: [UpdateItem; 5] = [
-    UpdateItem {
-        title: "Frieren",
-        source: "MangaDex",
-        chapter: "Chapter 142",
-        released: "12 min ago",
-        progress: 82,
-        downloaded: false,
-        initials: "FR",
-    },
-    UpdateItem {
-        title: "Solo Leveling",
-        source: "MangaFire",
-        chapter: "Chapter 180",
-        released: "48 min ago",
-        progress: 91,
-        downloaded: true,
-        initials: "SL",
-    },
-    UpdateItem {
-        title: "Blue Lock",
-        source: "MangaDex",
-        chapter: "Chapter 305",
-        released: "2 hours ago",
-        progress: 100,
-        downloaded: false,
-        initials: "BL",
-    },
-    UpdateItem {
-        title: "The Beginning After the End",
-        source: "Webtoon",
-        chapter: "Chapter 234",
-        released: "Yesterday",
-        progress: 64,
-        downloaded: true,
-        initials: "TB",
-    },
-    UpdateItem {
-        title: "Monstress",
-        source: "Comic Source",
-        chapter: "Issue 57",
-        released: "Yesterday",
-        progress: 12,
-        downloaded: false,
-        initials: "MO",
-    },
+    UpdateItem { title: "Frieren", source: "MangaDex", chapter: "Chapter 142", released: "12 min ago", progress: 82, downloaded: false, initials: "FR" },
+    UpdateItem { title: "Solo Leveling", source: "MangaFire", chapter: "Chapter 180", released: "48 min ago", progress: 91, downloaded: true, initials: "SL" },
+    UpdateItem { title: "Blue Lock", source: "MangaDex", chapter: "Chapter 305", released: "2 hours ago", progress: 100, downloaded: false, initials: "BL" },
+    UpdateItem { title: "The Beginning After the End", source: "Webtoon", chapter: "Chapter 234", released: "Yesterday", progress: 64, downloaded: true, initials: "TB" },
+    UpdateItem { title: "Monstress", source: "Comic Source", chapter: "Issue 57", released: "Yesterday", progress: 12, downloaded: false, initials: "MO" },
 ];
 
 fn matches_filter(item: UpdateItem, filter: UpdatesFilter, query: &str) -> bool {
@@ -242,6 +202,7 @@ pub fn UpdatesPage(props: UpdatesPageProps) -> Element {
                                 for item in visible {
                                     {
                                         let is_selected = selected.read().contains(&item.title);
+                                        let download_status = if item.downloaded { "Downloaded" } else { "Not downloaded" };
                                         rsx! {
                                             article {
                                                 class: if is_selected { "ny-library-item is-selected" } else { "ny-library-item" },
@@ -267,7 +228,7 @@ pub fn UpdatesPage(props: UpdatesPageProps) -> Element {
                                                         span { "{item.released}" }
                                                     }
                                                     h3 { "{item.title}" }
-                                                    p { "{item.chapter} · {if item.downloaded { "Downloaded" } else { "Not downloaded" }}" }
+                                                    p { "{item.chapter} · {download_status}" }
                                                     Progress { value: item.progress }
                                                     div { class: "ny-library-item__footer",
                                                         span { class: "ny-library-item__initials", "{item.initials}" }
@@ -329,10 +290,7 @@ mod tests {
 
     #[test]
     fn unread_filter_excludes_completed_updates() {
-        let completed = UpdateItem {
-            progress: 100,
-            ..UPDATES[0]
-        };
+        let completed = UpdateItem { progress: 100, ..UPDATES[0] };
         assert!(!matches_filter(completed, UpdatesFilter::Unread, ""));
         assert!(matches_filter(UPDATES[0], UpdatesFilter::Unread, ""));
     }
