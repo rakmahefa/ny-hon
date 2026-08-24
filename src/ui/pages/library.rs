@@ -36,6 +36,8 @@ pub enum LibraryState {
 pub struct LibraryPageProps {
     #[props(default = LibraryView::Grid)]
     pub view: LibraryView,
+    #[props(default)]
+    pub on_open: Option<EventHandler<String>>,
 }
 
 #[component]
@@ -204,6 +206,7 @@ pub fn LibraryPage(props: LibraryPageProps) -> Element {
                                 for (title, kind, chapter, progress, initials) in visible {
                                     {
                                         let is_selected = selected.read().contains(&title);
+                                        let on_open = props.on_open.clone();
                                         rsx! {
                                             article {
                                                 class: if is_selected { "ny-library-item is-selected" } else { "ny-library-item" },
@@ -236,7 +239,15 @@ pub fn LibraryPage(props: LibraryPageProps) -> Element {
                                                         if *selection_mode.read() {
                                                             span { class: "ny-eyebrow", if is_selected { "SELECTED" } else { "SELECT" } }
                                                         } else {
-                                                            Button { variant: ButtonVariant::Ghost, label: "Open" }
+                                                            Button {
+                                                                variant: ButtonVariant::Ghost,
+                                                                label: "Open",
+                                                                onclick: move |_| {
+                                                                    if let Some(handler) = &on_open {
+                                                                        handler.call(title.to_string());
+                                                                    }
+                                                                },
+                                                            }
                                                         }
                                                     }
                                                 }
