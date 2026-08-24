@@ -8,6 +8,6 @@ pub use components::{
     theme::Theme,
 };
 pub use pages::{
-    BrowsePage, BrowseState, HomePage, LibraryPage, MangaDetailPage, MangaDetailState,
-    UpdatesPage,
+    BrowsePage, BrowseState, HistoryFilter, HistoryPage, HistoryState, HomePage, LibraryPage,
+    MangaDetailPage, MangaDetailState, UpdatesPage,
 };
