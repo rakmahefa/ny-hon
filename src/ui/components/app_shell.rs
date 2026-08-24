@@ -10,6 +10,7 @@ use super::{
 pub struct AppShellProps {
     pub theme: Theme,
     pub active: NavItem,
+    pub title: String,
     pub on_navigate: EventHandler<NavItem>,
     pub on_toggle_theme: EventHandler<MouseEvent>,
     pub children: Element,
@@ -26,6 +27,7 @@ pub fn AppShell(props: AppShellProps) -> Element {
             div { class: "ny-main",
                 Header {
                     theme: props.theme,
+                    title: props.title.clone(),
                     on_toggle_theme: props.on_toggle_theme,
                 }
                 main { class: "ny-main__content", {props.children} }
