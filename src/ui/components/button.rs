@@ -7,6 +7,12 @@ pub enum ButtonVariant {
     Ghost,
 }
 
+impl Default for ButtonVariant {
+    fn default() -> Self {
+        Self::Primary
+    }
+}
+
 impl ButtonVariant {
     fn class(self) -> &'static str {
         match self {
