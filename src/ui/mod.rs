@@ -1,5 +1,10 @@
 mod components;
 mod pages;
 
-pub use components::{app_shell::AppShell, nav::NavItem, theme::Theme};
+pub use components::{
+    app_shell::AppShell,
+    empty_state::EmptyState,
+    nav::NavItem,
+    theme::Theme,
+};
 pub use pages::{HomePage, LibraryPage};
