@@ -3,18 +3,20 @@ use dioxus::prelude::*;
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub enum NavItem {
     Library,
-    Discover,
+    Updates,
     History,
-    Categories,
+    Browse,
+    More,
 }
 
 impl NavItem {
-    fn label(self) -> &'static str {
+    pub fn label(self) -> &'static str {
         match self {
             Self::Library => "Library",
-            Self::Discover => "Discover",
+            Self::Updates => "Updates",
             Self::History => "History",
-            Self::Categories => "Categories",
+            Self::Browse => "Browse",
+            Self::More => "More",
         }
     }
 }
@@ -29,9 +31,10 @@ pub struct SidebarProps {
 pub fn Sidebar(props: SidebarProps) -> Element {
     let items = [
         (NavItem::Library, "01"),
-        (NavItem::Discover, "02"),
+        (NavItem::Updates, "02"),
         (NavItem::History, "03"),
-        (NavItem::Categories, "04"),
+        (NavItem::Browse, "04"),
+        (NavItem::More, "05"),
     ];
 
     rsx! {

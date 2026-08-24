@@ -7,12 +7,7 @@ pub fn App() -> Element {
     let mut theme = use_signal(|| Theme::Dark);
     let mut active = use_signal(|| NavItem::Library);
 
-    let title = match *active.read() {
-        NavItem::Library => "Library",
-        NavItem::Discover => "Discover",
-        NavItem::History => "History",
-        NavItem::Categories => "Categories",
-    };
+    let title = active.read().label();
 
     rsx! {
         link { rel: "stylesheet", href: asset!("/assets/app.css") }
@@ -30,19 +25,26 @@ pub fn App() -> Element {
                 },
                 match *active.read() {
                     NavItem::Library => rsx! { LibraryPage {} },
-                    NavItem::Discover => rsx! { HomePage {} },
+                    NavItem::Updates => rsx! {
+                        EmptyState {
+                            eyebrow: "UPDATES".to_string(),
+                            title: "New chapters at a glance".to_string(),
+                            description: "The updates surface is ready for source-backed chapter releases, filters and bulk actions.".to_string(),
+                        }
+                    },
                     NavItem::History => rsx! {
                         EmptyState {
                             eyebrow: "HISTORY".to_string(),
                             title: "Reading history".to_string(),
-                            description: "The standalone page boundary is ready; persistence will connect here later.".to_string(),
+                            description: "The history surface is ready for persisted reading activity, resume actions and search.".to_string(),
                         }
                     },
-                    NavItem::Categories => rsx! {
+                    NavItem::Browse => rsx! { HomePage {} },
+                    NavItem::More => rsx! {
                         EmptyState {
-                            eyebrow: "CATEGORIES".to_string(),
-                            title: "Organize your library".to_string(),
-                            description: "Category management will be backed by the library domain, not the UI layer.".to_string(),
+                            eyebrow: "MORE".to_string(),
+                            title: "More library tools".to_string(),
+                            description: "Settings, downloads, categories, tracking and backup will live behind this secondary destination.".to_string(),
                         }
                     },
                 }
