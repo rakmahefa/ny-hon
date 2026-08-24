@@ -1,7 +1,7 @@
 use dioxus::prelude::*;
 
 use crate::ui::{
-    AppShell, EmptyState, HomePage, LibraryPage, MangaDetailPage, NavItem, Theme, UpdatesPage,
+    AppShell, BrowsePage, EmptyState, LibraryPage, MangaDetailPage, NavItem, Theme, UpdatesPage,
 };
 
 #[component]
@@ -42,7 +42,7 @@ pub fn App() -> Element {
                     description: "The history surface is ready for persisted reading activity, resume actions and search.".to_string(),
                 }
             },
-            NavItem::Browse => rsx! { HomePage {} },
+            NavItem::Browse => rsx! { BrowsePage {} },
             NavItem::More => rsx! {
                 EmptyState {
                     eyebrow: "MORE".to_string(),
