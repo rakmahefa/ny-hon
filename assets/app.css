@@ -94,7 +94,9 @@ button:disabled { cursor: not-allowed; opacity: .45; }
 .ny-stat span { color: var(--muted); font-size: 12px; }
 
 .ny-section-header { display: flex; align-items: end; justify-content: space-between; gap: 16px; }
-.ny-section-header h2 { margin: 4px 0 0; font-size: 21px; letter-spacing: -.025em; }
+.ny-section-header__copy { min-width: 0; }
+.ny-section-header h2 { margin: 4px 0 0; font-size: 30px; letter-spacing: -.04em; }
+.ny-section-header p { max-width: 680px; margin: 9px 0 0; color: var(--muted); line-height: 1.55; }
 .ny-text-button { border: 0; padding: 0; background: transparent; color: var(--muted); font-size: 13px; }
 .ny-text-button:hover { color: var(--text); }
 
@@ -109,6 +111,7 @@ button:disabled { cursor: not-allowed; opacity: .45; }
 
 .ny-cover { position: relative; display: flex; overflow: hidden; min-height: 170px; border-radius: 16px; background: linear-gradient(145deg, var(--surface-3), var(--surface-2)); isolation: isolate; }
 .ny-cover--portrait { aspect-ratio: 2 / 3; }
+.ny-cover--compact { min-height: 120px; width: 96px; flex: 0 0 96px; }
 .ny-cover__initials { position: absolute; left: 18px; top: 16px; z-index: -1; font-size: 42px; font-weight: 900; color: var(--muted); opacity: .35; }
 .ny-cover__shade { position: absolute; inset: 35% 0 0; z-index: -1; background: linear-gradient(180deg, transparent, rgba(0,0,0,.45)); }
 .ny-cover__caption { display: grid; align-content: end; gap: 3px; width: 100%; margin-top: auto; padding: 16px; color: white; }
@@ -138,7 +141,29 @@ button:disabled { cursor: not-allowed; opacity: .45; }
 .ny-empty-state h2 { margin: 2px 0 0; font-size: 22px; letter-spacing: -.03em; }
 .ny-empty-state p { max-width: 480px; margin: 0 0 10px; color: var(--muted); line-height: 1.6; }
 
+.ny-library-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 14px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
+.ny-filter-group, .ny-library-toolbar__actions { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.ny-filter, .ny-view-toggle { border: 1px solid transparent; border-radius: 10px; padding: 9px 12px; background: transparent; color: var(--muted); font-size: 12px; font-weight: 650; }
+.ny-filter:hover, .ny-view-toggle:hover { background: var(--surface-2); color: var(--text); }
+.ny-filter.is-active { border-color: var(--line); background: var(--surface-2); color: var(--text); }
+.ny-view-toggle { border-color: var(--line); background: var(--surface); color: var(--text); }
+.ny-library-collection { display: grid; gap: 14px; }
+.ny-library-collection--grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.ny-library-collection--list { grid-template-columns: 1fr; }
+.ny-library-item { min-width: 0; display: flex; gap: 16px; overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); transition: border-color var(--ease), transform var(--ease); }
+.ny-library-collection--grid .ny-library-item { display: block; }
+.ny-library-item:hover { transform: translateY(-2px); border-color: rgba(217,255,106,.24); }
+.ny-library-collection--grid .ny-library-item .ny-cover { border-radius: 0; }
+.ny-library-collection--list .ny-library-item { padding: 14px; }
+.ny-library-item__content { min-width: 0; display: grid; align-content: center; gap: 8px; padding: 16px; }
+.ny-library-collection--list .ny-library-item__content { flex: 1; padding: 3px 8px 3px 0; }
+.ny-library-item__meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 11px; }
+.ny-library-item h3 { margin: 0; font-size: 16px; letter-spacing: -.02em; }
+.ny-library-item p { margin: 0; color: var(--muted); font-size: 12px; }
+.ny-library-item__footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 2px; }
+.ny-library-item__initials { color: var(--muted); font-size: 10px; font-weight: 800; letter-spacing: .12em; }
+
 @media (max-width: 1250px) {
-    .ny-library-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .ny-library-grid, .ny-library-collection--grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .ny-dashboard-grid { grid-template-columns: 1fr; }
 }
