@@ -1,7 +1,14 @@
 use dioxus::prelude::*;
 
 use crate::ui::{
-    components::{app_shell::AppShell, card::Card, library_card::LibraryCard},
+    components::{
+        app_shell::AppShell,
+        badge::Badge,
+        button::{Button, ButtonVariant},
+        card::Card,
+        library_card::LibraryCard,
+        progress::Progress,
+    },
     Theme,
 };
 
@@ -14,10 +21,10 @@ pub struct HomePageProps {
 #[component]
 pub fn HomePage(props: HomePageProps) -> Element {
     let featured = [
-        ("Frieren", "Manga", "Chapter 141 · 82%", "FR"),
-        ("The Beginning After the End", "Webtoon", "Chapter 233 · 64%", "TB"),
-        ("Solo Leveling", "Manga", "Chapter 179 · 91%", "SL"),
-        ("The Sandman", "Comic", "Issue 18 · 37%", "SM"),
+        ("Frieren", "Manga", "Chapter 141", 82_u8, "FR"),
+        ("The Beginning After the End", "Webtoon", "Chapter 233", 64_u8, "TB"),
+        ("Solo Leveling", "Manga", "Chapter 179", 91_u8, "SL"),
+        ("The Sandman", "Comic", "Issue 18", 37_u8, "SM"),
     ];
 
     let new_updates = [
@@ -36,7 +43,7 @@ pub fn HomePage(props: HomePageProps) -> Element {
                         span { class: "ny-eyebrow", "WELCOME BACK" }
                         h2 { "Your next chapter is already here." }
                         p { "A focused Linux reader for manga, webtoons and comics — without hosting the content." }
-                        button { class: "ny-primary-button", "Open Library" }
+                        Button { variant: ButtonVariant::Primary, label: "Open Library" }
                     }
                     div { class: "ny-hero__stat-grid",
                         div { class: "ny-stat",
@@ -55,15 +62,15 @@ pub fn HomePage(props: HomePageProps) -> Element {
                         span { class: "ny-eyebrow", "CONTINUE" }
                         h2 { "Pick up where you left off" }
                     }
-                    button { class: "ny-text-button", "View all" }
+                    Button { variant: ButtonVariant::Ghost, label: "View all" }
                 }
 
                 section { class: "ny-library-grid",
-                    for (title, kind, progress, accent) in featured {
+                    for (title, kind, chapter, completion, accent) in featured {
                         LibraryCard {
                             title: title.to_string(),
                             kind: kind.to_string(),
-                            progress: progress.to_string(),
+                            progress: completion,
                             accent: accent.to_string(),
                         }
                     }
@@ -87,9 +94,13 @@ pub fn HomePage(props: HomePageProps) -> Element {
                         div { class: "ny-profile",
                             div { class: "ny-profile__ring", "72%" }
                             div {
-                                strong { "Reading streak" }
-                                p { "12 days · 4h 18m this week" }
-                                button { class: "ny-secondary-button", "Open history" }
+                                div { class: "ny-profile__header",
+                                    strong { "Reading streak" }
+                                    Badge { label: "12 days" }
+                                }
+                                p { "4h 18m this week" }
+                                Progress { value: 72 }
+                                Button { variant: ButtonVariant::Secondary, label: "Open history" }
                             }
                         }
                     }
