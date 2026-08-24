@@ -1,8 +1,8 @@
 use dioxus::prelude::*;
 
 use crate::ui::{
-    components::{app_shell::AppShell, empty_state::EmptyState, nav::NavItem},
-    HomePage, LibraryPage, Theme,
+    components::empty_state::EmptyState,
+    HomePage, LibraryPage, NavItem, Theme,
 };
 
 #[component]
