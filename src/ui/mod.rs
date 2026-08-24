@@ -7,4 +7,4 @@ pub use components::{
     nav::NavItem,
     theme::Theme,
 };
-pub use pages::{HomePage, LibraryPage};
+pub use pages::{HomePage, LibraryPage, UpdatesPage};
