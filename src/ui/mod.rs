@@ -1,5 +1,5 @@
 mod components;
 mod pages;
 
-pub use components::theme::Theme;
+pub use components::{nav::NavItem, theme::Theme};
 pub use pages::{HomePage, LibraryPage};
