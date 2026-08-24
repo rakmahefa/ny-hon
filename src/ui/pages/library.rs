@@ -172,7 +172,7 @@ pub fn LibraryPage(props: LibraryPageProps) -> Element {
                         title: "Library could not be loaded".to_string(),
                         description: "The UI exposes a retry boundary without owning persistence or networking.".to_string(),
                         action_label: Some("Retry".to_string()),
-                        on_action: move |_| state.set(LibraryState::Ready),
+                        onclick: Some(EventHandler::new(move |_| state.set(LibraryState::Ready))),
                     }
                 },
                 LibraryState::Offline => rsx! {
