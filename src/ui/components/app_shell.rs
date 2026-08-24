@@ -1,10 +1,16 @@
 use dioxus::prelude::*;
 
-use super::{header::Header, nav::{NavItem, Sidebar}, theme::Theme};
+use super::{
+    header::Header,
+    nav::{NavItem, Sidebar},
+    theme::Theme,
+};
 
 #[derive(Props, Clone, PartialEq)]
 pub struct AppShellProps {
     pub theme: Theme,
+    pub active: NavItem,
+    pub on_navigate: EventHandler<NavItem>,
     pub on_toggle_theme: EventHandler<MouseEvent>,
     pub children: Element,
 }
@@ -13,7 +19,10 @@ pub struct AppShellProps {
 pub fn AppShell(props: AppShellProps) -> Element {
     rsx! {
         div { class: "ny-shell",
-            Sidebar { active: NavItem::Library }
+            Sidebar {
+                active: props.active,
+                on_select: move |item| props.on_navigate.call(item),
+            }
             div { class: "ny-main",
                 Header {
                     theme: props.theme,
