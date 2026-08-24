@@ -1,6 +1,6 @@
 use dioxus::prelude::*;
 
-use super::progress::Progress;
+use super::{badge::Badge, cover::Cover, progress::Progress};
 
 #[derive(Props, Clone, PartialEq)]
 pub struct LibraryCardProps {
@@ -17,9 +17,15 @@ pub fn LibraryCard(props: LibraryCardProps) -> Element {
 
     rsx! {
         article { class: "ny-library-card",
-            div { class: "ny-library-card__cover", "{props.accent}" }
+            Cover {
+                title: props.title.clone(),
+                subtitle: props.kind.clone(),
+                aspect: "".to_string(),
+            }
             div { class: "ny-library-card__content",
-                div { class: "ny-library-card__meta", "{props.kind}" }
+                div { class: "ny-library-card__meta",
+                    Badge { label: props.kind.clone() }
+                }
                 h3 { "{props.title}" }
                 p { "Chapter progress · {progress}%" }
                 Progress { value: progress }
