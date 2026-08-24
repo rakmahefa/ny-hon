@@ -28,4 +28,4 @@ For a compile-only check:
 cargo check --all-targets
 ```
 
-Dioxus currently provides the desktop renderer used by this project; the branch intentionally keeps the initial dependency surface small. citeturn361749search0turn361749search3
+The initial dependency surface is intentionally small so the visual harness can remain independent from content, storage and source logic.
